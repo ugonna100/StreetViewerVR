@@ -67,6 +67,8 @@ def form_picture(decoded):
                 if img.ok:
                     print(URL)
 
+def form_direction()
+
 API_KEY = key.API_KEY
 #Test input: Disneyland
 #Test input: Universal Studios Hollywood
@@ -86,7 +88,7 @@ decoded = []
 if res.ok:
     print("POST Success")
     data = res.json()
-    print(data['routes'][0]['overview_polyline']['points'])
+    #print(data['routes'][0]['overview_polyline']['points'])
     decoded = decode_polyline(data['routes'][0]['overview_polyline']['points'])
     print(decoded)
     form_picture(decoded)
