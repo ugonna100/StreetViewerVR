@@ -1,5 +1,6 @@
 import keyfile as key
 import requests
+import math
 
 def decode_polyline(polyline_str):
     index, lat, lng = 0, 0, 0
@@ -34,6 +35,22 @@ def decode_polyline(polyline_str):
 
     return coordinates
 
+def form_picture(decoded):
+    #URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
+    #URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
+    heading = "90"
+    for i in decoded:
+        URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location="  # Metadata
+        lat = i[0]
+        lon = i[1]
+        URL += lat + "," + lon
+        URL += "fov=360&heading="
+        heading = math.degrees(math.atan(lon/lat))
+        
+        print(i[0], i[1])
+
+
+
 API_KEY = key.API_KEY
 
 #eOrigin = input("Starting Location: ")
@@ -48,9 +65,12 @@ testURL += API_KEY
 #URL += API_KEY
 
 res = requests.get(url = testURL)
+data = {}
+decoded = []
 if res.ok:
     print("POST Success")
     data = res.json()
     print(data['routes'][0]['overview_polyline']['points'])
     decoded = decode_polyline(data['routes'][0]['overview_polyline']['points'])
     print(decoded)
+    form_picture(decoded)
