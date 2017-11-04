@@ -35,6 +35,16 @@ def decode_polyline(polyline_str):
 
     return coordinates
 
+def bearing(a1, a2, b1, b2):
+    TWOPI = 6.2831853071795865
+    RAD2DEG = 57.2957795130823209
+    if (a1 == b1 and a2 == b2):
+        print("Origin & Destination cannot match!")
+    theta = math.atan2(b1 - a1, a2 - b2)
+    if (theta < 0.0):
+        theta += TWOPI
+    return RAD2DEG * theta
+
 def form_picture(decoded):
     #URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
     #URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
