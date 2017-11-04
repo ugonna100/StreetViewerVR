@@ -1,6 +1,9 @@
 import keyfile as key
 import requests
 import math
+import urllib.request
+from cv2 import *
+
 
 def decode_polyline(polyline_str):
     index, lat, lng = 0, 0, 0
@@ -11,13 +14,13 @@ def decode_polyline(polyline_str):
     # track of whether we've hit the end of the string. In each
     # while loop iteration, a single coordinate is decoded.
     while index < len(polyline_str):
-        # Gather lat/lon changes, store them in a dictionary to apply them later
+        # Gather la/lo changes, store them in a dictionary to apply them later
         for unit in ['latitude', 'longitude']:
             shift, result = 0, 0
 
             while True:
                 byte = ord(polyline_str[index]) - 63
-                index+=1
+                index += 1
                 result |= (byte & 0x1f) << shift
                 shift += 5
                 if not byte >= 0x20:
@@ -35,6 +38,7 @@ def decode_polyline(polyline_str):
 
     return coordinates
 
+
 def bearing(a1, a2, b1, b2):
     TWOPI = 6.2831853071795865
     RAD2DEG = 57.2957795130823209
@@ -45,42 +49,67 @@ def bearing(a1, a2, b1, b2):
         theta += TWOPI
     return RAD2DEG * theta
 
+
+URLs = []
+
+
 def form_picture(decoded):
-    #URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
-    #URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
+    # URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
+    # URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
     for i in range(0, len(decoded) - 1):
         URL = "https://maps.googleapis.com/maps/api/streetview?size=600x300&location="  # Metadata
         lat = decoded[i][0]
         lon = decoded[i][1]
-        lat2 = decoded[i+1][0]
-        lon2 = decoded[i+1][1]
-        heading = bearing(lat,lon,lat2,lon2)
+        lat2 = decoded[i + 1][0]
+        lon2 = decoded[i + 1][1]
+        heading = bearing(lat, lon, lat2, lon2)
         URL += str(lat) + "," + str(lon)
         URL += "&fov=360&heading="
         URL += str(int(heading)) + "&pitch=0&key=" + key.VIEW_KEY
-        #heading = math.degrees(math.atan(lon/lat))
-        print(URL)
-        #print(i[0], i[1])
+        # heading = math.degrees(math.atan(lon/lat))
+        URLs.append(URL)
+        # print(i[0], i[1])
+    # print(URLs)
+
 
 API_KEY = key.API_KEY
-#eOrigin = input("Starting Location: ")
-#Destination = input("Ending Location: ")
-#Test input: Disneyland
-#Test input: Universal Studios Hollywood
+# eOrigin = input("Starting Location: ")
+# Destination = input("Ending Location: ")
+# Test input: Disneyland
+# Test input: Universal Studios Hollywood
 testURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key="
 testURL += API_KEY
-#URL = "https://maps.googleapis.com/maps/api/directions/json?origin="
-#URL += Origin + "&destination="
-#URL += Destination + "4&key="
-#URL += API_KEY
+# URL = "https://maps.googleapis.com/maps/api/directions/json?origin="
+# URL += Origin + "&destination="
+# URL += Destination + "4&key="
+# URL += API_KEY
 
-res = requests.get(url = testURL)
+res = requests.get(url=testURL)
 data = {}
 decoded = []
+count = 0
 if res.ok:
-    print("POST Success")
+    # print("POST Success")
     data = res.json()
-    print(data['routes'][0]['overview_polyline']['points'])
+    # print(data['routes'][0]['overview_polyline']['points'])
     decoded = decode_polyline(data['routes'][0]['overview_polyline']['points'])
-    print(decoded)
+    # print(decoded)
     form_picture(decoded)
+    while count < len(URLs):
+        print("count: "+str(count))
+        urllib.request.urlretrieve(URLs[count], str(count) + ".jpg")
+        count = count + 1
+
+# Video Generation
+count = 0
+img1 = cv2.imread('0.jpg')
+height , width , layers =  img1.shape
+video = cv2.VideoWriter('video.avi',-1,1,(width,height))
+while count < len(URLs):
+    img1 = cv2.imread(str(count)+'.jpg')
+    video.write(img1)
+    count = count + 1
+fps = 24
+cv2.destroyAllWindows()
+video.release()
+break
