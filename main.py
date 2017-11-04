@@ -59,13 +59,11 @@ def form_picture(decoded):
         
         print(i[0], i[1])
 
-
-
 API_KEY = key.API_KEY
 
 #eOrigin = input("Starting Location: ")
-#Test input: Disneyland
 #Destination = input("Ending Location: ")
+#Test input: Disneyland
 #Test input: Universal Studios Hollywood
 testURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key="
 testURL += API_KEY
