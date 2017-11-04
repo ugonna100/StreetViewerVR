@@ -57,7 +57,7 @@ def form_picture(decoded):
         heading = bearing(lat,lon,lat2,lon2)
         URL += str(lat) + "," + str(lon)
         URL += "fov=360&heading="
-        URL += str(heading) + "&pitch=0"
+        URL += str(heading) + "&pitch=0&key=" + key.API_KEY
         #heading = math.degrees(math.atan(lon/lat))
         print(URL)
         #print(i[0], i[1])
