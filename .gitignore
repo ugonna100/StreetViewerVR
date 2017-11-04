@@ -3,3 +3,5 @@ keyfile.py
 .idea/modules.xml
 .idea/misc.xml
 .idea/StreetViewerVR.iml
+.idea/vcs.xml
+__pycache__/keyfile.cpython-36.pyc
