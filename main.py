@@ -49,7 +49,7 @@ def form_picture(decoded):
     #"https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
     #"https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
     for i in range(0, len(decoded) - 1):
-        URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=800x600&location="  # Metadata
+        URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=1920x1080&location="  # Metadata
         lat = decoded[i][0]
         lon = decoded[i][1]
         lat2 = decoded[i+1][0]
@@ -60,14 +60,12 @@ def form_picture(decoded):
         if res.ok:
             data = res.json()
             if data['status'] == "OK":
-                URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location="
+                URL = "https://maps.googleapis.com/maps/api/streetview?size=1920x1080&location="
                 URL += "{},{}&fov=360&heading={}&pitch=0&key={}".format(lat, lon, heading, key.VIEW_KEY)
                 img = requests.get(url=URL)
                 #print(URL)
                 if img.ok:
                     print(URL)
-
-def form_direction()
 
 API_KEY = key.API_KEY
 #Test input: Disneyland
