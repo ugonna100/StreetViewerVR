@@ -54,27 +54,29 @@ URLs = []
 
 
 def form_picture(decoded):
-<<<<<<< HEAD
-    # URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
-    # URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
-=======
-    #"https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
-    #"https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
->>>>>>> e0b31ab9fe257f9400caad33bd70bab5068641be
+
+
+<< << << < HEAD
+# URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
+# URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
+== == == =
+#"https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
+#"https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
+>>>>>> > e0b31ab9fe257f9400caad33bd70bab5068641be
     for i in range(0, len(decoded) - 1):
         URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=1920x1080&location="  # Metadata
         lat = decoded[i][0]
         lon = decoded[i][1]
-<<<<<<< HEAD
-        lat2 = decoded[i + 1][0]
-        lon2 = decoded[i + 1][1]
-        heading = bearing(lat, lon, lat2, lon2)
-        URL += str(lat) + "," + str(lon)
-        URL += "&fov=360&heading="
-        URL += str(int(heading)) + "&pitch=0&key=" + key.VIEW_KEY
-        # heading = math.degrees(math.atan(lon/lat))
-        URLs.append(URL)
-        # print(i[0], i[1])
+<< << << < HEAD
+    lat2 = decoded[i + 1][0]
+    lon2 = decoded[i + 1][1]
+    heading = bearing(lat, lon, lat2, lon2)
+    URL += str(lat) + "," + str(lon)
+    URL += "&fov=360&heading="
+    URL += str(int(heading)) + "&pitch=0&key=" + key.VIEW_KEY
+    # heading = math.degrees(math.atan(lon/lat))
+    URLs.append(URL)
+    # print(i[0], i[1])
     # print(URLs)
 
 
@@ -89,26 +91,29 @@ testURL += API_KEY
 # URL += Origin + "&destination="
 # URL += Destination + "4&key="
 # URL += API_KEY
-=======
-        lat2 = decoded[i+1][0]
-        lon2 = decoded[i+1][1]
-        heading = bearing(lat,lon,lat2,lon2)
-        URL += "{},{}&fov=360&heading={}&pitch=0&key={}".format(lat, lon, heading, key.VIEW_KEY)
-        res = requests.get(url=URL)
-        if res.ok:
-            data = res.json()
-            if data['status'] == "OK":
-                URL = "https://maps.googleapis.com/maps/api/streetview?size=1920x1080&location="
-                URL += "{},{}&fov=360&heading={}&pitch=0&key={}".format(lat, lon, heading, key.VIEW_KEY)
-                img = requests.get(url=URL)
-                #print(URL)
-                if img.ok:
-                    print(URL)
+== == == =
+    lat2 = decoded[i + 1][0]
+    lon2 = decoded[i + 1][1]
+    heading = bearing(lat, lon, lat2, lon2)
+    URL += "{},{}&fov=360&heading={}&pitch=0&key={}".format(
+        lat, lon, heading, key.VIEW_KEY)
+    res = requests.get(url=URL)
+    if res.ok:
+        data = res.json()
+        if data['status'] == "OK":
+            URL = "https://maps.googleapis.com/maps/api/streetview?size=1920x1080&location="
+            URL += "{},{}&fov=360&heading={}&pitch=0&key={}".format(
+                lat, lon, heading, key.VIEW_KEY)
+            img = requests.get(url=URL)
+            # print(URL)
+            if img.ok:
+                print(URL)
 
 API_KEY = key.API_KEY
-#Test input: Disneyland
-#Test input: Universal Studios Hollywood
-testURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key={}".format(API_KEY)
+# Test input: Disneyland
+# Test input: Universal Studios Hollywood
+testURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key={}".format(
+    API_KEY)
 
 #   User Input
 #Origin = input("Starting Location: ")
@@ -117,7 +122,7 @@ testURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneylan
 #URL += Origin + "&destination="
 #URL += Destination + "4&key="
 #URL += API_KEY
->>>>>>> e0b31ab9fe257f9400caad33bd70bab5068641be
+>>>>>> > e0b31ab9fe257f9400caad33bd70bab5068641be
 
 res = requests.get(url=testURL)
 data = {}
@@ -126,26 +131,26 @@ count = 0
 if res.ok:
     # print("POST Success")
     data = res.json()
-<<<<<<< HEAD
-    # print(data['routes'][0]['overview_polyline']['points'])
-=======
-    #print(data['routes'][0]['overview_polyline']['points'])
->>>>>>> e0b31ab9fe257f9400caad33bd70bab5068641be
+<< << << < HEAD
+# print(data['routes'][0]['overview_polyline']['points'])
+== == == =
+# print(data['routes'][0]['overview_polyline']['points'])
+>>>>>> > e0b31ab9fe257f9400caad33bd70bab5068641be
     decoded = decode_polyline(data['routes'][0]['overview_polyline']['points'])
     # print(decoded)
     form_picture(decoded)
     while count < len(URLs):
-        print("count: "+str(count))
+        print("count: " + str(count))
         urllib.request.urlretrieve(URLs[count], str(count) + ".jpg")
         count = count + 1
 
 # Video Generation
 count = 0
 img1 = cv2.imread('0.jpg')
-height , width , layers =  img1.shape
-video = cv2.VideoWriter('video.avi',-1,1,(width,height))
+height, width, layers = img1.shape
+video = cv2.VideoWriter('video.avi', -1, 1, (width, height))
 while count < len(URLs):
-    img1 = cv2.imread(str(count)+'.jpg')
+    img1 = cv2.imread(str(count) + '.jpg')
     video.write(img1)
     count = count + 1
 fps = 24
