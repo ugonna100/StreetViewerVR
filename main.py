@@ -46,8 +46,8 @@ def bearing(a1, a2, b1, b2):
     return RAD2DEG * theta
 
 def form_picture(decoded):
-    #URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
-    #URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
+    #"https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
+    #"https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
     for i in range(0, len(decoded) - 1):
         URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=800x600&location="  # Metadata
         lat = decoded[i][0]
@@ -55,30 +55,26 @@ def form_picture(decoded):
         lat2 = decoded[i+1][0]
         lon2 = decoded[i+1][1]
         heading = bearing(lat,lon,lat2,lon2)
-        #URL += str(lat) + "," + str(lon)
-        #URL += "&fov=360&heading="
-        #URL += str(int(heading)) + "&pitch=0&key=" + key.VIEW_KEY
         URL += "{},{}&fov=360&heading={}&pitch=0&key={}".format(lat, lon, heading, key.VIEW_KEY)
-        #print(URL)
         res = requests.get(url=URL)
         if res.ok:
             data = res.json()
-            #print(data['status'])
             if data['status'] == "OK":
-                URL = "https://maps.googleapis.com/maps/api/streetview/?size=800x600&location="
+                URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location="
                 URL += "{},{}&fov=360&heading={}&pitch=0&key={}".format(lat, lon, heading, key.VIEW_KEY)
-                res = requests.get(url=URL)
+                img = requests.get(url=URL)
                 #print(URL)
-                if res.ok:
+                if img.ok:
                     print(URL)
 
 API_KEY = key.API_KEY
-#eOrigin = input("Starting Location: ")
-#Destination = input("Ending Location: ")
 #Test input: Disneyland
 #Test input: Universal Studios Hollywood
-testURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key="
-testURL += API_KEY
+testURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key={}".format(API_KEY)
+
+#   User Input
+#Origin = input("Starting Location: ")
+#Destination = input("Ending Location: ")
 #URL = "https://maps.googleapis.com/maps/api/directions/json?origin="
 #URL += Origin + "&destination="
 #URL += Destination + "4&key="
