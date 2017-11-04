@@ -48,16 +48,19 @@ def bearing(a1, a2, b1, b2):
 def form_picture(decoded):
     #URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
     #URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
-    heading = "90"
-    for i in decoded:
+    for i in range(0, len(decoded) - 1):
         URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location="  # Metadata
-        lat = i[0]
-        lon = i[1]
-        URL += lat + "," + lon
+        lat = decoded[i][0]
+        lon = decoded[i][1]
+        lat2 = decoded[i+1][0]
+        lon2 = decoded[i+1][1]
+        heading = bearing(lat,lon,lat2,lon2)
+        URL += str(lat) + "," + str(lon)
         URL += "fov=360&heading="
-        heading = math.degrees(math.atan(lon/lat))
-        
-        print(i[0], i[1])
+        URL += str(heading) + "&pitch=0"
+        #heading = math.degrees(math.atan(lon/lat))
+        print(URL)
+        #print(i[0], i[1])
 
 API_KEY = key.API_KEY
 #eOrigin = input("Starting Location: ")
