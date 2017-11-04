@@ -1,0 +1,10 @@
+c:\users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\obj\Debug\360 Destination Visualization.csprojResolveAssemblyReference.cache
+c:\users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\obj\Debug\_360_Destination_Visualization.Form1.resources
+c:\users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\obj\Debug\_360_Destination_Visualization.Properties.Resources.resources
+c:\users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\obj\Debug\360 Destination Visualization.csproj.GenerateResource.Cache
+c:\users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\obj\Debug\360 Destination Visualization.csproj.CoreCompileInputs.cache
+c:\users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\bin\Debug\360 Destination Visualization.exe.config
+c:\users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\bin\Debug\360 Destination Visualization.exe
+c:\users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\bin\Debug\360 Destination Visualization.pdb
+c:\users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\obj\Debug\360 Destination Visualization.exe
+c:\users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\obj\Debug\360 Destination Visualization.pdb
