@@ -59,10 +59,7 @@ def form_picture(decoded):
         
         print(i[0], i[1])
 
-
-
 API_KEY = key.API_KEY
-
 #eOrigin = input("Starting Location: ")
 #Test input: Disneyland
 #Destination = input("Ending Location: ")
