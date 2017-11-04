@@ -49,15 +49,15 @@ def form_picture(decoded):
     #URL = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
     #URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
     for i in range(0, len(decoded) - 1):
-        URL = "https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location="  # Metadata
+        URL = "https://maps.googleapis.com/maps/api/streetview?size=600x300&location="  # Metadata
         lat = decoded[i][0]
         lon = decoded[i][1]
         lat2 = decoded[i+1][0]
         lon2 = decoded[i+1][1]
         heading = bearing(lat,lon,lat2,lon2)
         URL += str(lat) + "," + str(lon)
-        URL += "fov=360&heading="
-        URL += str(heading) + "&pitch=0&key=" + key.API_KEY
+        URL += "&fov=360&heading="
+        URL += str(int(heading)) + "&pitch=0&key=" + key.VIEW_KEY
         #heading = math.degrees(math.atan(lon/lat))
         print(URL)
         #print(i[0], i[1])
