@@ -116,3 +116,13 @@ while count < len(URLs):
 fps = 24
 cv2.destroyAllWindows()
 video.release()
+
+#Journey searcher: Returns picture at position searched for e.x. 50% = 134.jpg
+def tripHunter(percent):
+    num_URLs = len(URLs)
+    target = num_URLs*percent
+    target = int(target)
+    results = []
+    results.append(str(target) + ".jpg")
+    results.append(URLs[target])
+    return results
