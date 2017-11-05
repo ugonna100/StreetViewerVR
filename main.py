@@ -2,7 +2,7 @@ import keyfile as key
 import requests
 import math
 import urllib.request
-from cv2 import *
+#from cv2 import *
 
 
 def decode_polyline(polyline_str):
@@ -105,17 +105,17 @@ if res.ok:
         count = count + 1
 
 # Video Generation
-count = 0
-img1 = cv2.imread('0.jpg')
-height, width, layers = img1.shape
-video = cv2.VideoWriter('video.avi', -1, 1, (width, height))
-while count < len(URLs):
-    img1 = cv2.imread(str(count) + '.jpg')
-    video.write(img1)
-    count = count + 1
-fps = 24
-cv2.destroyAllWindows()
-video.release()
+# count = 0
+# img1 = cv2.imread('0.jpg')
+# height, width, layers = img1.shape
+# video = cv2.VideoWriter('video.avi', -1, 1, (width, height))
+# while count < len(URLs):
+#     img1 = cv2.imread(str(count) + '.jpg')
+#     video.write(img1)
+#     count = count + 1
+# fps = 24
+# cv2.destroyAllWindows()
+# video.release()
 
 #Journey searcher: Returns picture at position searched for e.x. 50% = 134.jpg
 def tripHunter(percent):
