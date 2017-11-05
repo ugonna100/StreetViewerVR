@@ -1,9 +1,11 @@
 import keyfile as key
 import requests
 import math
-import urllib.request
+import urllib
+import sys
 #from cv2 import *
 
+URLs = []
 
 def decode_polyline(polyline_str):
     index, lat, lng = 0, 0, 0
@@ -50,9 +52,6 @@ def bearing(a1, a2, b1, b2):
     return RAD2DEG * theta
 
 
-URLs = []
-
-
 def form_picture(decoded):
 #"https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" #Image API
 #"https://maps.googleapis.com/maps/api/streetview/metadata?size=600x300&location=" #Metadata
@@ -75,49 +74,51 @@ def form_picture(decoded):
                 if img.ok:
                     URLs.append(URL)
 
-API_KEY = key.API_KEY
-# Test input: Disneyland
-# Test input: Universal Studios Hollywood
-testURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key={}".format(API_KEY)
-#   User Input
-#Origin = input("Starting Location: ")
-#Destination = input("Ending Location: ")
-#URL = "https://maps.googleapis.com/maps/api/directions/json?origin="
-#URL += Origin + "&destination="
-#URL += Destination + "4&key="
-#URL += API_KEY
+def runThis(initial, destination):
 
-res = requests.get(url=testURL)
-data = {}
-decoded = []
-count = 0
-if res.ok:
-    # print("POST Success")
-    data = res.json()
-    # print(data['routes'][0]['overview_polyline']['points'])
-    # print(data['routes'][0]['overview_polyline']['points'])
-    decoded = decode_polyline(data['routes'][0]['overview_polyline']['points'])
-    # print(decoded)
-    form_picture(decoded)
-    while count < len(URLs):
-        print("count: " + str(count))
-        urllib.request.urlretrieve(URLs[count], str(count) + ".jpg")
-        count = count + 1
+    API_KEY = key.API_KEY
+    # Test input: Disneyland
+    # Test input: Universal Studios Hollywood
+    #testURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key={}".format(API_KEY)
+    #   User Input
+    Origin = initial #input("Starting Location: ")
+    Destination = destination #input("Ending Location: ")
+    URL = "https://maps.googleapis.com/maps/api/directions/json?origin="
+    URL += Origin + "&destination="
+    URL += Destination + "&key="
+    URL += API_KEY
+    print(URL)
+    res = requests.get(url=URL)
+    data = {}
+    decoded = []
+    count = 0
+    if res.ok:
+        # print("POST Success")
+        data = res.json()
+        decoded = decode_polyline(data['routes'][0]['overview_polyline']['points'])
+        print(decoded)
+        print("Coordinates from {} to {}".format(Origin, Destination))
+        form_picture(decoded)
+        while count < len(URLs):
+            print("count: " + str(count))
+            urllib.request.urlretrieve(URLs[count], str(count) + ".jpg")
+            count = count + 1
 
-# Video Generation
-# count = 0
-# img1 = cv2.imread('0.jpg')
-# height, width, layers = img1.shape
-# video = cv2.VideoWriter('video.avi', -1, 1, (width, height))
-# while count < len(URLs):
-#     img1 = cv2.imread(str(count) + '.jpg')
-#     video.write(img1)
-#     count = count + 1
-# fps = 24
-# cv2.destroyAllWindows()
-# video.release()
+    # Video Generation
+    # count = 0
+    # img1 = cv2.imread('0.jpg')
+    # height, width, layers = img1.shape
+    # video = cv2.VideoWriter('video.avi', -1, 1, (width, height))
+	# print("~Forming Video~")
+    # while count < len(URLs):
+    #     img1 = cv2.imread(str(count) + '.jpg')
+    #     video.write(img1)
+    #     count = count + 1
+    # fps = 24
+    # cv2.destroyAllWindows()
+    # video.release()
 
-#Journey searcher: Returns picture at position searched for e.x. 50% = 134.jpg
+    #Journey searcher: Returns picture at position searched for e.x. 50% = 134.jpg
 def tripHunter(percent):
     num_URLs = len(URLs)
     target = num_URLs*percent
@@ -126,3 +127,6 @@ def tripHunter(percent):
     results.append(str(target) + ".jpg")
     results.append(URLs[target])
     return results
+
+if __name__ == "__main__":
+    runThis(sys.argv[1], sys.argv[2])
