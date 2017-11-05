@@ -101,7 +101,7 @@ def runThis(initial, destination):
         form_picture(decoded)
         while count < len(URLs):
             print("count: " + str(count))
-            urllib.request.urlretrieve(URLs[count], str(count) + ".jpg")
+            urllib.request.urlretrieve(URLs[count], str(Origin) + str(Destination) + str(count) + ".jpg")
             count = count + 1
 
     # Video Generation
