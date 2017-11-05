@@ -15,6 +15,7 @@ namespace _360_Destination_Visualization
 {
     public partial class Form1 : Form
     {
+        public String pythonPath;
         public Form1()
         {
             InitializeComponent();
@@ -27,14 +28,14 @@ namespace _360_Destination_Visualization
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+                pythonPath = PDirectory.Text;
                 ProcessStartInfo pythonInfo = new ProcessStartInfo();
                 Process python;
-                pythonInfo.FileName = @"C:\Python27\python.exe";
-                pythonInfo.Arguments = string.Format(@"C:\Users\pspyt\source\repos\360 Destination Visualization\360 Destination Visualization\Resources\main.py");
+                pythonInfo.FileName = @""+ pythonPath;
+                pythonInfo.Arguments = string.Format(@"C:\PythonFiles\main.py {0} {1}", FromText.Text,ToText.Text);
                 pythonInfo.CreateNoWindow = false;
                 pythonInfo.UseShellExecute = false;
-                pythonInfo.RedirectStandardOutput = true;
+                
 
             Console.WriteLine("Python Starting");
                 python = Process.Start(pythonInfo);
@@ -54,6 +55,16 @@ namespace _360_Destination_Visualization
         }
 
         private void ToText_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Set_Click(object sender, EventArgs e)
+        {
+            pythonPath = PDirectory.Text;
+        }
+
+        private void PDirectory_TextChanged(object sender, EventArgs e)
         {
 
         }

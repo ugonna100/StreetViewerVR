@@ -82,8 +82,5 @@
   <ItemGroup>
     <None Include="Resources\5467699-street-wallpapers.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\main.py" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

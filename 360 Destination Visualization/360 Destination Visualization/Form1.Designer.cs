@@ -33,6 +33,9 @@
             this.ToText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.PDirectory = new System.Windows.Forms.TextBox();
+            this.Set = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -89,14 +92,46 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "From:";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label3.Location = new System.Drawing.Point(42, 98);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Python Directory:";
+            // 
+            // PDirectory
+            // 
+            this.PDirectory.Location = new System.Drawing.Point(147, 98);
+            this.PDirectory.Name = "PDirectory";
+            this.PDirectory.Size = new System.Drawing.Size(361, 20);
+            this.PDirectory.TabIndex = 6;
+            this.PDirectory.TextChanged += new System.EventHandler(this.PDirectory_TextChanged);
+            // 
+            // Set
+            // 
+            this.Set.Location = new System.Drawing.Point(515, 98);
+            this.Set.Name = "Set";
+            this.Set.Size = new System.Drawing.Size(40, 19);
+            this.Set.TabIndex = 7;
+            this.Set.Text = "SET";
+            this.Set.UseVisualStyleBackColor = true;
+            this.Set.Click += new System.EventHandler(this.Set_Click);
+            // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
             this.BackgroundImage = global::_360_Destination_Visualization.Properties.Resources._5467699_street_wallpapers;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(661, 493);
+            this.Controls.Add(this.Set);
+            this.Controls.Add(this.PDirectory);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ToText);
@@ -104,6 +139,7 @@
             this.Controls.Add(this.button1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "Form1";
             this.Text = "Destination Visualization";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -119,6 +155,9 @@
         private System.Windows.Forms.TextBox ToText;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox PDirectory;
+        private System.Windows.Forms.Button Set;
     }
 }
 
